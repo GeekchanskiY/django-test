@@ -19,10 +19,20 @@ class AddApplication(View):
         vacancy = get_object_or_404(Vacancy, pk=vacancy_id)
 
         form = ApplicationForm(request.POST, vacancy=vacancy)
-        
+
         if form.is_valid():
             form.save()
 
             return redirect('/')
         
         return render(request, 'add_vacancy.html', {'form': form, 'vacancy': vacancy})
+    
+
+class MyApplications(View):
+    def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect('login')
+        
+        application = Application.objects.filter(vacancy__author=request.user)
+
+        return render(request, 'my_candidates.html', {'applications': application})

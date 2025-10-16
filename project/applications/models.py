@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 
+
 class Application(models.Model):
     want_salary = models.IntegerField(verbose_name='желаемая зп')
     user = models.CharField(verbose_name='имя')

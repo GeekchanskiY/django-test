@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %} Index {% endblock %}
+
+{% block content %}
+{% for i in applications %}
+    <div class="post">
+        <span class="post-title">{{ i.user }} - {{ i.vacancy.name }}</span>
+        <span>Желаемая/Ожидаемая ЗП: {{ i.vacancy.salary }}/{{ i.want_salary }}</span>
+        <span>Почта: {{ i.email }}</span>
+    </div>
+{% endfor %}
+{% endblock %}
