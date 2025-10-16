@@ -4,7 +4,7 @@ from .models import Vacancy, Employer
 
 @admin.register(Vacancy)
 class VacancyAdmin(admin.ModelAdmin):
-    fields = ['name', 'salary', 'employer']
+    fields = ['name', 'salary', 'employer', 'author']
     list_display = ['name', 'salary', 'employer']
 
 

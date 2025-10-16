@@ -10,9 +10,6 @@ class Index(View):
     def get(self, request):
         vacancies = Vacancy.objects.all()
 
-        if not request.user.is_authenticated:
-            return redirect(to='/')
-
         return render(request, 'index.html', {
             'vacancies': vacancies
         })
@@ -40,14 +37,21 @@ class AddEmployer(View):
 
 class AddVacancy(View):
     def get(self, request):
-        form = VacancyForm()
+        if not request.user.is_authenticated:
+            return redirect(to='register')
+
+        form = VacancyForm(author=request.user)
         
         return render(request, 'add_vacancy.html', {'form': form})
     
     def post(self, request):
-        form = VacancyForm(request.POST)
+        if not request.user.is_authenticated:
+            return redirect(to='register')
+        
+        form = VacancyForm(request.POST, author=request.user)
 
         if form.is_valid():
+            
             form.save()
             
             return redirect(to='/')

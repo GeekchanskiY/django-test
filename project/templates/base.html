@@ -14,16 +14,16 @@
 <body>
 <header>
     <a id="header-link" href="/">Blog</a>
-    {% if username %}
+    {% if request.user.is_authenticated %}
         <div class="auth-block">
-            <span id="user-name" style="color: white;">Привет, {{ username }}!</span>
-            <a href="/user/logout" id="logout-link">Logout</a>
+            <span id="user-name" style="color: white;">Привет, {{ request.user.username }}!</span>
+            <a href="{% url 'logout' %}" id="logout-link">Logout</a>
         </div>
         
     {% else %}
         <div class="auth-block">
-            <a href="/user/login" id="login-link">Login</a>
-            <a href="/user/register" id="login-link">Register</a>
+            <a href="{% url 'login' %}" id="login-link">Login</a>
+            <a href="{% url 'register' %}" id="login-link">Register</a>
         </div>
     {% endif %}
 </header>
