@@ -5,7 +5,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from .forms import EmployerForm, VacancyForm
 from .models import Vacancy
 
-# Create your views here.
 
 class Index(View):
     def get(self, request):
@@ -28,8 +27,6 @@ class ShowVacancy(View):
 
 
         return render(request, 'show_vacancy.html', {'vacancy': vacancy})
-
-        
     
 
 class AddEmployer(View):

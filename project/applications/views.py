@@ -1,3 +1,28 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views import View
+from django.core.exceptions import ObjectDoesNotExist
 
-# Create your views here.
+from .forms import ApplicationForm
+from .models import Application
+from vacancies.models import Vacancy
+
+
+class AddApplication(View):
+    def get(self, request, vacancy_id):
+        vacancy = get_object_or_404(Vacancy, pk=vacancy_id)
+
+        form = ApplicationForm(vacancy=vacancy)
+        
+        return render(request, 'apply.html', {'form': form, 'vacancy': vacancy})
+    
+    def post(self, request, vacancy_id):
+        vacancy = get_object_or_404(Vacancy, pk=vacancy_id)
+
+        form = ApplicationForm(request.POST, vacancy=vacancy)
+        
+        if form.is_valid():
+            form.save()
+
+            return redirect('/')
+        
+        return render(request, 'add_vacancy.html', {'form': form, 'vacancy': vacancy})
