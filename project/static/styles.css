@@ -101,7 +101,8 @@ form {
     box-shadow: var(--box-shadow);
 }
 
-form button{
+form input[type=submit]{
+    display: inline-block;
     background-color: var(--bg);
     color: var(--fg);
     border: none;
@@ -119,6 +120,10 @@ form input[type=reset] {
     border-radius: var(--border-radius);
     cursor: pointer;
     transition: .3s;
+}
+
+form label {
+    color: var(--bg)
 }
 
 

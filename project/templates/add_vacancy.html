@@ -3,9 +3,9 @@
 {% block title %} Index {% endblock %}
 
 {% block content %}
-<form action="{% url 'add_employer' %}" method="post">
+<form action="{% url 'add_vacancy' %}" method="post">
     {% csrf_token %}
-    <span class="form-header">Добавить работодателя</span>
+    <span class="form-header">Добавить вакансию</span>
     {{ form }}
     <input type="submit" value="Submit">
 </form>

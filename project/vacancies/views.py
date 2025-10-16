@@ -1,7 +1,7 @@
 from django.views import View
 from django.shortcuts import render, redirect
 
-from .forms import EmployerForm
+from .forms import EmployerForm, VacancyForm
 from .models import Vacancy
 
 # Create your views here.
@@ -20,6 +20,7 @@ class Index(View):
     def post(self, request):
         return render(request, 'index.html', None)
     
+
 class AddEmployer(View):
     def get(self, request):
         form = EmployerForm()
@@ -31,7 +32,24 @@ class AddEmployer(View):
 
         if form.is_valid():
             form.save()
-            
+
             return redirect(to='/')
         
         return render(request, 'add_employer.html', {'form': form})
+    
+
+class AddVacancy(View):
+    def get(self, request):
+        form = VacancyForm()
+        
+        return render(request, 'add_vacancy.html', {'form': form})
+    
+    def post(self, request):
+        form = VacancyForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            
+            return redirect(to='/')
+        
+        return render(request, 'add_vacancy.html', {'form': form})
