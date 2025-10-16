@@ -16,7 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
+from applications.urls import urlpatters as app_patterns
+from vacancies.urls import urlpatters as vacancies_patterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
+    path('applications/', include(app_patterns)),
+    path('vacancies/', include(vacancies_patterns))
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
