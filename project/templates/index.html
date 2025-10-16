@@ -5,7 +5,7 @@
 {% block content %}
 {% for i in vacancies %}
     <div class="post-preview">
-        <a href="{% url 'vacancies' %}"> {{ i.name }} </a>
+        <a href="{% url 'show_vacancy' i.id %}"> {{ i.name }} </a>
     </div>
 {% endfor %}
 {% endblock %}

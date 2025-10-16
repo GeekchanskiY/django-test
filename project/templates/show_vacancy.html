@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %} Vacancy {% endblock %}
+
+{% block content %}
+<div class="post">
+    <span class="post-title">{{ vacancy.name }}</span>
+    <p class="post-content">
+        Зп: {{ vacancy.salary }} <br>
+        Контора: {{ vacancy.employer.name }}
+    </p> 
+    <div class="post-group">
+        {% if request.user == vacancy.author %}
+            <a href="/blog/update_post/{{ vacancy.id }}">обновить</a>
+            <a href="/blog/delete/{{ vacancy.id }}">удалить</a>
+        {% endif %}
+    </div>
+
+    <!-- <div class="post-group">
+        <a href="{% url 'apply' %}">apply</a>
+    </div> -->
+</div>
+{% endblock %}

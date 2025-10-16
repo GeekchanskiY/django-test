@@ -1,5 +1,6 @@
 from django.views import View
 from django.shortcuts import render, redirect
+from django.core.exceptions import ObjectDoesNotExist
 
 from .forms import EmployerForm, VacancyForm
 from .models import Vacancy
@@ -16,6 +17,19 @@ class Index(View):
     
     def post(self, request):
         return render(request, 'index.html', None)
+    
+
+class ShowVacancy(View):
+    def get(self, request, vacancy_id):
+        try:
+            vacancy = Vacancy.objects.get(id=vacancy_id)
+        except ObjectDoesNotExist:
+            return redirect('vacancies')
+
+
+        return render(request, 'show_vacancy.html', {'vacancy': vacancy})
+
+        
     
 
 class AddEmployer(View):
