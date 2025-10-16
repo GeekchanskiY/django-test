@@ -3,5 +3,9 @@
 {% block title %} Index {% endblock %}
 
 {% block content %}
-<span>Index page</span>
+{% for i in vacancies %}
+    <div class="post-preview">
+        <a href="{% url 'vacancies' %}"> {{ i.name }} </a>
+    </div>
+{% endfor %}
 {% endblock %}

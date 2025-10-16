@@ -29,13 +29,13 @@
 </header>
 
 <main>
-    {% block main %} 
+    {% block content %} 
         <h1>Index page</h1>
     {% endblock %}
 </main>
 
 <footer>
-    <a href="/blog/add_post">Add post</a>
+    <a href="{% url 'add_employer' %}">Add employer</a>
     <a href="/user">User list</a>
 </footer>
 <span id="copyright">© 2025 Dima, Inc.</span>
