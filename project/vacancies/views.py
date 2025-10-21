@@ -4,10 +4,12 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from .forms import EmployerForm, VacancyForm
 from .models import Vacancy
+from .signals import custom_signal
 
 
 class Index(View):
     def get(self, request):
+        custom_signal.send(sender=None, text='privet')
         vacancies = Vacancy.objects.all()
 
         return render(request, 'index.html', {

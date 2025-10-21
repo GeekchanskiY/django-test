@@ -6,6 +6,8 @@ from .forms import ApplicationForm
 from .models import Application
 from vacancies.models import Vacancy
 
+from django.dispatch import Signal
+
 
 class AddApplication(View):
     def get(self, request, vacancy_id):
@@ -36,3 +38,5 @@ class MyApplications(View):
         application = Application.objects.filter(vacancy__author=request.user)
 
         return render(request, 'my_candidates.html', {'applications': application})
+    
+
