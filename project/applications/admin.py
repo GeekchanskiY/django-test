@@ -7,5 +7,5 @@ from .models import Application
 class ApplicationAdmin(admin.ModelAdmin):
 
     class Meta:
-        verbose_name = 'заявка'
-        verbose_name_plural = 'заявки'
+        verbose_name = 'application'
+        verbose_name_plural = 'applications'

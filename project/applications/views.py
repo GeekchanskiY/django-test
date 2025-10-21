@@ -1,15 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
 
 from .forms import ApplicationForm
 from .models import Application
 from vacancies.models import Vacancy
 
-from django.dispatch import Signal
 
 
 class AddApplication(View):
+    @login_required
     def get(self, request, vacancy_id):
         vacancy = get_object_or_404(Vacancy, pk=vacancy_id)
 
@@ -17,6 +17,7 @@ class AddApplication(View):
         
         return render(request, 'apply.html', {'form': form, 'vacancy': vacancy})
     
+    @login_required
     def post(self, request, vacancy_id):
         vacancy = get_object_or_404(Vacancy, pk=vacancy_id)
 

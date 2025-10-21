@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %} Update vacancy {% endblock %}
+
+{% block content %}
+<form action="{% url 'update_vacancy' vacancy_id %}" method="post">
+    {% csrf_token %}
+    <span class="form-header">Обновить вакансию</span>
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

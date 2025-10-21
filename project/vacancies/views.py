@@ -1,5 +1,5 @@
 from django.views import View
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 
 from .forms import EmployerForm, VacancyForm
@@ -70,3 +70,38 @@ class AddVacancy(View):
             return redirect(to='/')
         
         return render(request, 'add_vacancy.html', {'form': form})
+    
+
+class DeleteVacancy(View):
+    def get(self, request, vacancy_id):
+        vacancy = get_object_or_404(Vacancy, pk=vacancy_id)
+
+        vacancy.delete()
+
+        return redirect('vacancies')
+    
+
+class UpdateVacancy(View):
+    def get(self, request, vacancy_id):
+        vacancy = get_object_or_404(Vacancy, pk=vacancy_id)
+
+        if vacancy.author != request.user:
+            return redirect('vacancies')
+
+        form = VacancyForm(instance=vacancy)
+
+        return render(request, 'update_vacancy.html', {'form': form, 'vacancy_id': vacancy_id})
+
+    def post(self, request, vacancy_id):
+        vacancy = get_object_or_404(Vacancy, pk=vacancy_id)
+
+        if vacancy.author != request.user:
+            return redirect('vacancies')
+
+        form = VacancyForm(request.POST, instance=vacancy)
+        if form.is_valid():
+            form.save()
+
+            return redirect('show_vacancy', vacancy_id)
+        
+        return render(request, 'update_vacancy.html', {'form': form, 'vacancy_id': vacancy_id})

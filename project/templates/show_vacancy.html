@@ -9,13 +9,14 @@
         Зп: {{ vacancy.salary }} <br>
         Контора: {{ vacancy.employer.name }}
     </p> 
+    
     <div class="post-group">
         {% if request.user == vacancy.author %}
-            <a href="/blog/update_post/{{ vacancy.id }}">обновить</a>
-            <a href="/blog/delete/{{ vacancy.id }}">удалить</a>
+            <a href="{% url 'update_vacancy' vacancy.id %}">обновить</a>
+            <a href="{% url 'delete_vacancy' vacancy.id %}">удалить</a>
         {% endif %}
     </div>
-
+    
     <div class="post-group">
         <a href="{% url 'apply' vacancy.id %}">apply</a>
     </div>
