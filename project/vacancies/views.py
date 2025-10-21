@@ -13,8 +13,17 @@ class Index(View):
         custom_signal.send(sender=None, text='privet')
         vacancies = Vacancy.objects.all()
 
+        paginator = Paginator(vacancies, 2) 
+
+        page_number = request.GET.get("page")
+        page_obj = paginator.get_page(page_number)
+
         return render(request, 'index.html', {
-            'vacancies': vacancies
+            'vacancies': page_obj,
+            'page_minus': page_obj.number - 1,
+            'page_minus_2': page_obj.number - 2,
+            'page_plus': page_obj.number + 1,
+            'page_plus_2': page_obj.number + 2,
         })
     
     def post(self, request):

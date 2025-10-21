@@ -8,4 +8,27 @@
         <a href="{% url 'show_vacancy' i.id %}"> {{ i.name }} </a>
     </div>
 {% endfor %}
+<div class="pagination">
+    {% if vacancies.has_previous %}
+    <a href="?page={{ vacancies.previous_page_number }}"><</a>
+    {% endif %}
+    
+    {% if vacancies.number > 2 %}
+    <a href="?page={{ page_minus_2 }}">{{ page_minus_2 }}</a>
+    {% endif %}
+     {% if vacancies.number > 1 %}
+    <a href="?page={{ page_minus }}">{{ page_minus }}</a>
+    {% endif %}
+    <span>{{ vacancies.number }}/{{ vacancies.paginator.num_pages }}</span>
+    {% if vacancies.number|add:"1" <= vacancies.paginator.num_pages %}
+    <a href="?page={{ page_plus }}">{{ page_plus }}</a>
+    {% endif %}
+     {% if vacancies.number|add:"2" <= vacancies.paginator.num_pages %}
+    <a href="?page={{ page_plus_2 }}">{{ page_plus_2 }}</a>
+    {% endif %}
+
+    {% if vacancies.has_next %}
+        <a href="?page={{ vacancies.next_page_number }}">></a>
+    {% endif %}
+</div>
 {% endblock %}

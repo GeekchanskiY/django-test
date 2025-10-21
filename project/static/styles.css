@@ -220,15 +220,17 @@ form textarea {
 }
 
 .pagination {
+    background-color: var(--fg);
     color: var(--text);
-    width: 50%;
-    margin-left: 25%;
     border-radius: var(--border-radius);
     padding: var(--gap);
     display: flex;
     justify-content: center;
     align-items: center;
+    width: max-content;
     gap: var(--gap);
+    margin-left: auto;
+    margin-right: auto;
     margin-top: var(--gap);
 }
 
@@ -240,5 +242,6 @@ form textarea {
     padding: 0 10px;
     border-radius: var(--border-radius);
     background-color: var(--accent);
-    color: var(--text)
+    color: var(--text);
+    text-decoration: none;
 }
