@@ -1,6 +1,7 @@
 from django.views import View
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.paginator import Paginator
 
 from .forms import EmployerForm, VacancyForm
 from .models import Vacancy
