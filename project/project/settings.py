@@ -37,6 +37,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'django_admin_env_notice',
     'project.apps.AdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -73,6 +74,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "django_admin_env_notice.context_processors.from_settings",
             ],
         },
     },
@@ -142,3 +144,10 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+ENVIRONMENT_NAME = "Debug mode"
+ENVIRONMENT_COLOR = "#00FF2F"
+
+if not DEBUG:
+    ENVIRONMENT_NAME = "Production server"
+    ENVIRONMENT_COLOR = "#FF2222"
