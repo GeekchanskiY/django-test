@@ -7,7 +7,10 @@
     <span class="post-title">{{ vacancy.name }}</span>
     <p class="post-content">
         Зп: {{ vacancy.salary }} <br>
-        Контора: {{ vacancy.employer.name }}
+        Контора: {{ vacancy.employer.name }} <br>
+        {% if vacancy.employer.author %}
+        Автор: <a href="{% url 'profile' vacancy.employer.author.id %}">{{ vacancy.employer.author.username }}</a>
+        {% endif %}
     </p> 
     
     <div class="post-group">

@@ -41,12 +41,12 @@ class ShowVacancy(View):
 
 class AddEmployer(View):
     def get(self, request):
-        form = EmployerForm()
+        form = EmployerForm(author=request.user)
         
         return render(request, 'add_employer.html', {'form': form})
     
     def post(self, request):
-        form = EmployerForm(request.POST)
+        form = EmployerForm(request.POST, author=request.user)
         if form.is_valid():
             form.save()
 

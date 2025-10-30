@@ -6,7 +6,17 @@ from .models import Employer, Vacancy
 class EmployerForm(forms.ModelForm):
     class Meta:
         model = Employer
-        fields = ('name',)
+        fields = ('name', 'author')
+        widgets = {'author': forms.HiddenInput()}
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('author', None)
+        
+        super().__init__(*args, **kwargs)
+
+        if self.user:
+            self.fields['author'].initial = self.user
+
 
 
 class VacancyForm(forms.ModelForm):
