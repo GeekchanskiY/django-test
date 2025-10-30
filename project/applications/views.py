@@ -7,7 +7,6 @@ from .models import Application
 from vacancies.models import Vacancy
 
 
-
 class AddApplication(View):
     @login_required
     def get(self, request, vacancy_id):

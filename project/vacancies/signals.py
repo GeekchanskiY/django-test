@@ -3,7 +3,9 @@ from django.db.models.signals import post_save
 
 from .models import Vacancy
 
+
 custom_signal = Signal()
+
 
 @receiver(custom_signal)
 def print_custom_signal(sender, text, **kwargs):

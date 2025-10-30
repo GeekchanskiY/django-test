@@ -1,13 +1,14 @@
 from django.contrib.admin import AdminSite
-
 from django.contrib.auth.models import User
+
 
 class MyAdmin(AdminSite):
     site_header = 'TMS django app'
     site_title = 'TMS admin'
-    index_title = 'TMS site administration'
     site_url = '/'
 
+    index_title = 'TMS site administration'
+    
     def index(self, request, extra_context=None):
         users_count = User.objects.count()
 

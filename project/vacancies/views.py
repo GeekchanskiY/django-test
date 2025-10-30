@@ -14,7 +14,6 @@ class Index(View):
         vacancies = Vacancy.objects.all()
 
         paginator = Paginator(vacancies, 2) 
-
         page_number = request.GET.get("page")
         page_obj = paginator.get_page(page_number)
 
@@ -37,7 +36,6 @@ class ShowVacancy(View):
         except ObjectDoesNotExist:
             return redirect('vacancies')
 
-
         return render(request, 'show_vacancy.html', {'vacancy': vacancy})
     
 
@@ -49,7 +47,6 @@ class AddEmployer(View):
     
     def post(self, request):
         form = EmployerForm(request.POST)
-
         if form.is_valid():
             form.save()
 
@@ -84,9 +81,7 @@ class AddVacancy(View):
 
 class DeleteVacancy(View):
     def get(self, request, vacancy_id):
-        vacancy = get_object_or_404(Vacancy, pk=vacancy_id)
-
-        vacancy.delete()
+        get_object_or_404(Vacancy, pk=vacancy_id).delete()
 
         return redirect('vacancies')
     
@@ -94,7 +89,6 @@ class DeleteVacancy(View):
 class UpdateVacancy(View):
     def get(self, request, vacancy_id):
         vacancy = get_object_or_404(Vacancy, pk=vacancy_id)
-
         if vacancy.author != request.user:
             return redirect('vacancies')
 
@@ -104,7 +98,6 @@ class UpdateVacancy(View):
 
     def post(self, request, vacancy_id):
         vacancy = get_object_or_404(Vacancy, pk=vacancy_id)
-
         if vacancy.author != request.user:
             return redirect('vacancies')
 

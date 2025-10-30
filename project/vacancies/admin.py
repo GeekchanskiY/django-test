@@ -3,6 +3,7 @@ from django.contrib import admin
 from .models import Vacancy, Employer
 from applications.models import Application
 
+
 class ApplicationInline(admin.StackedInline):
     model = Application
     extra = 1
@@ -15,5 +16,4 @@ class VacancyAdmin(admin.ModelAdmin):
     inlines = (ApplicationInline,)
 
 
-# Register your models here.
 admin.site.register(Employer)

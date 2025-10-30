@@ -1,21 +1,16 @@
 import os
 
 from pathlib import Path
-
 from dotenv import load_dotenv
-
 
 load_dotenv()
 
-
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 SECRET_KEY = os.getenv("DJANGO_SECRET")
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-
 
 INSTALLED_APPS = [
     'django_admin_env_notice',
@@ -63,7 +58,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -74,7 +68,6 @@ DATABASES = {
         'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -105,9 +98,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / "media"
 
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 ENVIRONMENT_NAME = "Debug mode"
 ENVIRONMENT_COLOR = "#00FF2F"

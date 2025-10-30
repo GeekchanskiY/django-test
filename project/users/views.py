@@ -23,13 +23,10 @@ class ShowProfile(View):
         hours = seconds // 3600
         
         last_login = 'long time ago'
-
         if hours < 48:
             last_login = 'yesterday'
-
         if hours < 24:
             last_login = 'today'
-
         if hours < 1:
             last_login = 'just now'
 
@@ -55,28 +52,18 @@ class ShowProfile(View):
         hours = seconds // 3600
         
         last_login = 'long time ago'
-
         if hours < 48:
             last_login = 'yesterday'
-
         if hours < 24:
             last_login = 'today'
-
         if hours < 1:
             last_login = 'just now'
 
         form = UploadAvatarForm(request.POST, request.FILES)
-        print(request.POST, request.FILES)
         if form.is_valid():
             avatar = form.cleaned_data["image"]
-            print(avatar)
-            print(type(avatar))
-
             profile.avatar = avatar
-
             profile.save()
-        else:
-            print(form.errors)
 
         return render(request, 'profile.html', {
             'profile': profile,
@@ -85,13 +72,13 @@ class ShowProfile(View):
             'form': form
         })
 
+
 class Register(View):
     def get(self, request):
         form = UserCreationForm()
 
         return render(request, 'register.html', {'form': form})
     
-     
     def post(self, request):
         form = UserCreationForm(request.POST)
 
