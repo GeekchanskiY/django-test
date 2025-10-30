@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Index {% endblock %}
+
+{% block head %} 
+<link rel="stylesheet" href="{% static 'profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="profile">
+    <div class="profile_block profile_block_image">
+        {% if profile.avatar %}
+            <img src="{{ profile.avatar.url }}" alt="{{ profile.user.username }} avatar">
+        {% else %}
+            <img src="{% static 'default-avatar.png' %}" alt="{{ profile.user.username }} avatar">
+        {% endif %} 
+    </div>
+    <div class="profile_block">
+        <span class="profile-title">{{ profile.user.username }}</span>
+        <span>Name: {{ profile.user.first_name }} {{ profile.user.last_name }}</span>
+        <span>Active: {{ profile.user.is_active }}</span>
+        <span></span>
+        <span>Member since: {{ date_joined }}</span>
+        <span>Last login: {{ last_login }}</span>
+        {% if profile.user.is_staff %}
+            <span style="color:var(--accent)" >Admin</span>
+        {% endif %}
+    </div>
+</div>
+<br><br><br>
+{% if profile.user.id == request.user.id %}
+    <form action="{% url 'profile' profile.user.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">Submit</button>
+    </form>
+{% endif %}
+{% endblock %}

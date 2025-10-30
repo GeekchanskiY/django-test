@@ -1,0 +1,50 @@
+.profile a {
+    color: var(--fg);
+    transition: var(--transition);
+}
+
+.profile a:hover {
+    color: var(--accent);
+}
+
+.profile {
+    display: flex;
+    flex-direction: row;
+    gap: var(--gap);
+
+    background-color: var(--fg);
+    color: var(--text);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    width: 50%;
+    margin-left: 25%;
+}
+
+.profile-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.profile p{
+    border-radius: var(--border-radius);
+    background-color: var(--accent);
+    color: var(--text);
+    padding: var(--gap);
+    font-size: 1.2rem;
+    width: 60%;
+    margin-left: 20%;
+}
+
+.profile img {
+    width: 150px;
+    height: 150px;
+}
+
+.profile_block {
+    display: flex;
+    padding: var(--gap);
+    flex-direction: column;
+}
+
