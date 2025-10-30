@@ -15,6 +15,10 @@ class ShowProfile(View):
             user_id = request.user.id
 
         profile = get_object_or_404(Profile, user=user_id)
+        if request.user.id != user_id:
+            profile.views += 1
+            profile.save()
+
         date_joined = profile.user.date_joined.strftime('%Y-%m-%d')
 
         now = datetime.now(timezone.utc)

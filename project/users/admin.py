@@ -5,6 +5,8 @@ from .models import Profile
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user__username',)
+    list_display = ('user__username', 'views')
 
-    fields = ('user', 'avatar')
+    fields = ('user', 'avatar', 'views')
+
+    ordering=('-views',)

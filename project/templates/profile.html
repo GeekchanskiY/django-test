@@ -19,11 +19,15 @@
         <span class="profile-title">{{ profile.user.username }}</span>
         <span>Name: {{ profile.user.first_name }} {{ profile.user.last_name }}</span>
         <span>Active: {{ profile.user.is_active }}</span>
-        <span></span>
+        <br>
         <span>Member since: {{ date_joined }}</span>
         <span>Last login: {{ last_login }}</span>
         {% if profile.user.is_staff %}
             <span style="color:var(--accent)" >Admin</span>
+        {% endif %}
+        <br>
+        {% if profile.user.id == request.user.id %}
+        <span>Profile views: {{ profile.views }}</span>
         {% endif %}
     </div>
 </div>
