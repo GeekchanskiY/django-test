@@ -26,17 +26,16 @@ print_data.short_description = 'print data in console'
 @admin.register(Application)
 class ApplicationAdmin(admin.ModelAdmin):
     fieldsets = (
-        ('primary user info', {'fields': ('user', 'email')}),
+        ('primary user info', {'fields': ('user',)}),
         ('other info', {'fields': ('vacancy', 'want_salary', 'created_at')}),
     )
     readonly_fields = ('created_at',)
-    search_fields = ('email', 'user', 'vacancy__id')
+    search_fields = ('email', 'user__username', 'vacancy__id')
 
     actions = (print_data,)
 
     list_filter = ('user', 'created_at', IsDimaListFilter)
     list_display = ('id', 'user', 'vacancy', 'vacancy__id', 'created_at', 'salary_diff', 'is_dima')
-    list_editable = ('user',)
     list_display_links = ('id', 'salary_diff',)
 
     ordering = ('-vacancy__id', '-id', )
@@ -45,8 +44,11 @@ class ApplicationAdmin(admin.ModelAdmin):
         return obj.vacancy.salary - obj.want_salary
     
     def is_dima(self, obj):
-        username_lower = obj.user.lower()
-        return username_lower == "dima" or username_lower == "dimka" or username_lower == "dmitry"
+        if obj.user:
+            username_lower = obj.user.username.lower()
+            return username_lower == "dima" or username_lower == "dimka" or username_lower == "dmitry"
+        else:
+            return False
     
     is_dima.boolean = True
     is_dima.short_description = '?Dima'

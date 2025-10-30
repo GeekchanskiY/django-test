@@ -18,6 +18,7 @@ class IsDimaListFilter(admin.SimpleListFilter):
         human-readable name for the option that will appear
         in the right sidebar.
         """
+        
         return [
             ("yes", "Yes, Dima!"),
             ("no", "No, Dima!"),
@@ -29,11 +30,13 @@ class IsDimaListFilter(admin.SimpleListFilter):
         provided in the query string and retrievable via
         `self.value()`.
         """
+
         if self.value() == "yes":
             return queryset.filter(
-                Q(user__icontains='Dima') | Q(user__icontains='Dmitry') | Q(user__icontains='Dimka'),
+                Q(user__username__icontains='Dima') | Q(user__username__icontains='Dmitry') | Q(user__username__icontains='Dimka'),
             )
+        
         if self.value() == "no":
             return queryset.exclude(
-                Q(user__icontains='Dima') | Q(user__icontains='Dmitry') | Q(user__icontains='Dimka')
+                Q(user__username__icontains='Dima') | Q(user__username__icontains='Dmitry') | Q(user__username__icontains='Dimka')
             )

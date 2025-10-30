@@ -12,7 +12,7 @@
 </head>
 <body>
 <header>
-    <a id="header-link" href="/">Blog</a>
+    <a id="header-link" href="/">HH</a>
     {% if request.user.is_authenticated %}
         <div class="auth-block">
             <span id="user-name" style="color: white;">Привет, <a href="{% url 'profile' request.user.id %}">{{ request.user.username }}</a>!</span>

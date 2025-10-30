@@ -1,26 +1,26 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from django.conf import settings
 
 from .forms import ApplicationForm
 from .models import Application
 from vacancies.models import Vacancy
 
 
-class AddApplication(View):
-    @login_required
+class AddApplication(LoginRequiredMixin, View):
     def get(self, request, vacancy_id):
         vacancy = get_object_or_404(Vacancy, pk=vacancy_id)
 
-        form = ApplicationForm(vacancy=vacancy)
+        form = ApplicationForm(vacancy=vacancy, user=request.user)
         
         return render(request, 'apply.html', {'form': form, 'vacancy': vacancy})
     
-    @login_required
     def post(self, request, vacancy_id):
         vacancy = get_object_or_404(Vacancy, pk=vacancy_id)
 
-        form = ApplicationForm(request.POST, vacancy=vacancy)
+        form = ApplicationForm(request.POST, vacancy=vacancy, user=request.user)
 
         if form.is_valid():
             form.save()
